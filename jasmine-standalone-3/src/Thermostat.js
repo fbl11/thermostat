@@ -37,13 +37,20 @@ Thermostat.prototype = {
     },
 
     toggleMode: function () {
-        if (this.powerSavingMode === true){
-            this.powerSavingMode = false;
-            this.maxTemp = 32;
+        if (this.isSavingPower() === true) {
+            this.powerSavingMode = false
+            this.maxTemp = 32
         } else {
-            this.powerSavingMode = true;
-            this.maxTemp = 25;
+            this.powerSavingMode = true
+            this.maxTemp = 25
         }
+        // if (this.powerSavingMode === true){
+        //     this.powerSavingMode = false;
+        //     this.maxTemp = 32;
+        // } else {
+        //     this.powerSavingMode = true;
+        //     this.maxTemp = 25;
+        // }
     },
 
     reset: function () {
