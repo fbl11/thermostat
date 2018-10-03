@@ -58,6 +58,31 @@ describe('Thermostat', function(){
             expect(thermostat.powerSavingMode).toEqual(true)
         })
     })
+    describe('reset', function(){
+        it('user can reset the temperature to 20', function(){
+            initial_temp = thermostat.temperature;
+            thermostat.tempUp(5);
+            thermostat.reset()
+            expect(thermostat.temperature).toEqual(20)
+        })
+    })
+
+    describe('currentUsage', function(){
+        it('displays the current energy usage as high, if temp is above 25', function(){
+            thermostat.temperature = 26
+            expect(thermostat.currentUsage()).toEqual('high-usage')
+        })
+        it('displays the current energy usage as medium if temp between 19 and 24 inclusive', function(){
+            thermostat.temperature = 19
+            expect(thermostat.currentUsage()).toEqual('medium-usage')
+            thermostat.temperature = 24
+            expect(thermostat.currentUsage()).toEqual('medium-usage')
+        })
+        it('displays the current energy usage as low if temp below 18', function(){
+            thermostat.temperature = 17
+            expect(thermostat.currentUsage()).toEqual('low-usage')
+        })
+    })
 
     
 })

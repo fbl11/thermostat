@@ -1,11 +1,7 @@
 // Specification:
 
-// If power saving mode is off, the maximum temperature is 32 degrees
-// You can reset the temperature to 20 with a reset function
-// You can ask about the thermostat's current energy usage: < 18 is low-usage, < 25 is medium-usage, anything else is high-usage.
 // (In the challenges where we add an interface, low-usage will be indicated with green, medium-usage indicated with black, high-usage indicated with red.)
 
-// Thermostat starts at 20 degrees
 
 describe("Features", function(){
     var thermostat 
@@ -14,18 +10,20 @@ describe("Features", function(){
     })
 
     describe("Thermostat", function(){
+        // Thermostat starts at 20 degrees
         it("starts at a temperature 20 degrees", function(){
             expect(thermostat.temperature).toEqual(20)
         })
-        // If power saving mode is on, the maximum temperature is 25 degrees
         // Power saving mode is on by default
         it('has a power saving mode', function(){
             expect(thermostat.powerSavingMode).toEqual(true)
         })
+        // If power saving mode is on, the maximum temperature is 25 degrees
 
         it('if power saving mode is on maximum temperature is 25 degrees', function(){
             expect(thermostat.maxTemp).toEqual(25)
         })
+        // If power saving mode is off, the maximum temperature is 32 degrees
 
         it('if power saving mode is off maximum temperature is 32 degrees', function(){
             thermostat.toggleMode()
@@ -63,6 +61,18 @@ describe("Features", function(){
             thermostat.temperature = 20;
             thermostat.tempDown(5);
             expect(thermostat.temperature).toBe(15)
+        })
+        // You can reset the temperature to 20 with a reset function
+        it('user can reset the temperature to 20', function(){
+            initial_temp = thermostat.temperature;
+            thermostat.tempUp(5);
+            thermostat.reset()
+            expect(thermostat.temperature).toEqual(20)
+        })
+// You can ask about the thermostat's current energy usage: < 18 is low-usage, < 25 is medium-usage, anything else is high-usage.
+        it('displays the current energy usage as high, medium or low', function(){
+            energyUsage = ['high-usage', 'medium-usage', 'low-usage']
+            expect(energyUsage).toContain(thermostat.currentUsage())
         })
 
     
