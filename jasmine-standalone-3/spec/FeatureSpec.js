@@ -25,11 +25,23 @@ describe('Features', function(){
             expect(thermostat.isSavingPower()).toEqual(true)
         })
 
-        it('allows the user to toggle the power saving mode', function () {
-            thermostat.toggleMode()
-            expect(thermostat.isSavingPower()).toEqual(false)
-            thermostat.toggleMode()
-            expect(thermostat.isSavingPower()).toEqual(true)
+        // it('allows the user to toggle the power saving mode', function () {
+        //     thermostat.toggleMode()
+        //     expect(thermostat.isSavingPower()).toEqual(false)
+        //     thermostat.toggleMode()
+        //     expect(thermostat.isSavingPower()).toEqual(true)
+        // })
+
+        // instead of toggle
+        it('allows the user to switch power saving mode off', function () {
+            thermostat.switchOffSaving()
+            expect(thermostat.isSavingPower()).toBe(false)
+        })
+
+        it('can switch power saving mode on', function () {
+            thermostat.switchOffSaving()
+            thermostat.switchOnSaving()
+            expect(thermostat.isSavingPower()).toBe(true)
         })
 
         // If power saving mode is on, the maximum temperature is 25 degrees
@@ -38,7 +50,8 @@ describe('Features', function(){
         })
         // If power saving mode is off, the maximum temperature is 32 degrees
         it('if power saving mode is off maximum temperature is 32 degrees', function(){
-            thermostat.toggleMode()
+            // thermostat.toggleMode()
+            thermostat.switchOffSaving()
             expect(thermostat.maxTemp).toEqual(32)
         })
 

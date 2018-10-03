@@ -23,12 +23,28 @@ describe('Thermostat', function(){
         expect(thermostat.isSavingPower()).toEqual(true)
     })
 
-    describe('toggleMode', function () {
-        it('allows the user to toggle the power saving mode', function () {
-            thermostat.toggleMode()
-            expect(thermostat.isSavingPower()).toEqual(false)
-            thermostat.toggleMode()
-            expect(thermostat.isSavingPower()).toEqual(true)
+    // describe('toggleMode', function () {
+    //     it('allows the user to toggle the power saving mode', function () {
+    //         thermostat.toggleMode()
+    //         expect(thermostat.isSavingPower()).toEqual(false)
+    //         thermostat.toggleMode()
+    //         expect(thermostat.isSavingPower()).toEqual(true)
+    //     })
+    // })
+
+    // instead of toggle
+    describe('switchOffSaving', function () {
+        it('can switch power saving mode off', function () {
+            thermostat.switchOffSaving()
+            expect(thermostat.isSavingPower()).toBe(false)
+        })
+    })
+
+    describe('switchOnSaving', function () {
+        it('can switch power saving mode on', function () {
+            thermostat.switchOffSaving()
+            thermostat.switchOnSaving()
+            expect(thermostat.isSavingPower()).toBe(true)
         })
     })
 
@@ -37,7 +53,8 @@ describe('Thermostat', function(){
     })
 
     it('if power saving mode is off maximum temperature is 32 degrees', function(){
-        thermostat.toggleMode()
+        thermostat.switchOffSaving()
+        // thermostat.toggleMode()
         expect(thermostat.maxTemp).toEqual(32)
     })
 
@@ -51,12 +68,6 @@ describe('Thermostat', function(){
             thermostat.tempUp(thermostat.maxTemp + 1)
             expect(thermostat.getCurrentTemp()).not.toBeGreaterThan(thermostat.maxTemp)
         })
-        // above tests both scenarios
-        // it('if power saving mode is on, maximum temperature cannot exceed 32 degrees', function () {
-        //     thermostat.toggleMode()
-        //     thermostat.tempUp(thermostat.maxTemp + 1)
-        //     expect(thermostat.temperature).not.toBeGreaterThan(thermostat.maxTemp)
-        // })
     })
 
     describe('tempDown', function(){

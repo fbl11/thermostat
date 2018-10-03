@@ -32,25 +32,27 @@ Thermostat.prototype = {
             return
         }
         this.temperature -= degrees
-        // let newtemp = this.temperature - degrees;
-        // newtemp < this.MIN_TEMP ? this.temperature = this.MIN_TEMP : this.temperature = newtemp;
     },
 
-    toggleMode: function () {
-        if (this.isSavingPower() === true) {
-            this.powerSavingMode = false
-            this.maxTemp = 32
-        } else {
-            this.powerSavingMode = true
-            this.maxTemp = 25
-        }
-        // if (this.powerSavingMode === true){
-        //     this.powerSavingMode = false;
-        //     this.maxTemp = 32;
-        // } else {
-        //     this.powerSavingMode = true;
-        //     this.maxTemp = 25;
-        // }
+    // toggleMode: function () {
+    //     if (this.isSavingPower() === true) {
+    //         this.powerSavingMode = false
+    //         this.maxTemp = 32
+    //     } else {
+    //         this.powerSavingMode = true
+    //         this.maxTemp = 25
+    //     }
+    // },
+
+    // instead of toggle 
+    switchOffSaving: function () {
+        this.powerSavingMode = false
+        this.maxTemp = 32
+    },
+
+    switchOnSaving: function () {
+        this.powerSavingMode = true
+        this.maxTemp = 25
     },
 
     reset: function () {
