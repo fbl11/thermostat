@@ -1,7 +1,5 @@
 // Specification:
 
-// You can decrease the temperature with a down function
-// The minimum temperature is 10 degrees
 // If power saving mode is on, the maximum temperature is 25 degrees
 // If power saving mode is off, the maximum temperature is 32 degrees
 // Power saving mode is on by default
@@ -21,6 +19,11 @@ describe("Features", function(){
         it("starts at a temperature 20 degrees", function(){
             expect(thermostat.temperature).toEqual(20)
         })
+    // The minimum temperature is 10 degrees
+        it("has a minimum temperature of 10 degrees", function(){
+            expect(thermostat.minTemp).toBe(10)
+        })
+
     // You can increase the temperature with an up function
         it('can adjust the temperature up', function(){
             thermostat.temperature = 20;

@@ -1,5 +1,6 @@
 function Thermostat(){
     this.temperature = 20;
+    this.minTemp = 10;
 }
 
 Thermostat.prototype = {
@@ -8,7 +9,10 @@ Thermostat.prototype = {
   },
 
   tempDown: function(degrees){
-      this.temperature -= degrees;
+
+    let newtemp = this.temperature - degrees;
+    newtemp < this.minTemp ? this.temperature = this.minTemp : this.temperature = newtemp;
+    
   }
 
 };

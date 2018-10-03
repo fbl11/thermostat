@@ -7,6 +7,9 @@ describe('Thermostat', function(){
     it('has a default temperature of 20 degrees', function(){
         expect(thermostat.temperature).toEqual(20)
     })
+    it('has a minimum temperature of 10 degrees', function(){
+        expect(thermostat.minTemp).toBe(10)
+    })
 
     describe('tempUp', function(){
         it("should increase the temperature by given value", function(){
@@ -22,5 +25,12 @@ describe('Thermostat', function(){
             thermostat.tempDown(5);
             expect(thermostat.temperature).toBe(15);
         })
+        it("should not decrease the temperature below minimum temperature", function(){
+            thermostat.temperature = 20;
+            thermostat.tempDown(15);
+            expect(thermostat.temperature).not.toBeLessThan(thermostat.minTemp);
+        })
     })
+
+    
 })
