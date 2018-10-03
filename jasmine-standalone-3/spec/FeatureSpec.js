@@ -1,6 +1,6 @@
 // Specification:
 // (In the challenges where we add an interface, low-usage will be indicated with green, medium-usage indicated with black, high-usage indicated with red.)
-'use strict';
+'use strict'
 
 describe('Features', function(){
     var thermostat 
@@ -17,19 +17,19 @@ describe('Features', function(){
 
         // The minimum temperature is 10 degrees
         it('has a minimum temperature of 10 degrees', function () {
-            expect(thermostat.minTemp).toBe(10)
+            expect(thermostat.MIN_TEMP).toBe(10)
         })
 
         // Power saving mode is on by default
         it('has a power saving mode that is on by default', function() {
-            expect(thermostat.powerSavingMode).toEqual(true)
+            expect(thermostat.isSavingPower()).toEqual(true)
         })
 
         it('allows the user to toggle the power saving mode', function () {
             thermostat.toggleMode()
-            expect(thermostat.powerSavingMode).toEqual(false)
+            expect(thermostat.isSavingPower()).toEqual(false)
             thermostat.toggleMode()
-            expect(thermostat.powerSavingMode).toEqual(true)
+            expect(thermostat.isSavingPower()).toEqual(true)
         })
 
         // If power saving mode is on, the maximum temperature is 25 degrees
