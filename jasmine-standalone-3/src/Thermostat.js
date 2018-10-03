@@ -21,10 +21,15 @@ Thermostat.prototype = {
     isSavingPower: function () {
         return this.powerSavingMode
     },
+
     // prototype functions
-    tempUp: function (degrees = 1) {  
-        let newtemp = this.temperature + degrees;
-        newtemp > this.maxTemp ? this.temperature = this.maxTemp : this.temperature = newtemp;
+    tempUp: function (degrees = 1) {
+        let newTemp = degrees + this.getCurrentTemp()
+        if (newTemp > this.maxTemp) {
+            this.temperature = this.maxTemp
+        } else {
+            this.temperature = newTemp
+        }
     },
 
     tempDown: function (degrees = 1) {

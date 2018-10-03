@@ -67,6 +67,7 @@ describe('Thermostat', function(){
         it('temperature cannot be increased beyond maximum temperature', function(){
             thermostat.tempUp(thermostat.maxTemp + 1)
             expect(thermostat.getCurrentTemp()).not.toBeGreaterThan(thermostat.maxTemp)
+            expect(thermostat.getCurrentTemp()).toEqual(thermostat.maxTemp)
         })
     })
 

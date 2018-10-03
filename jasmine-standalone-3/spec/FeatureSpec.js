@@ -12,7 +12,7 @@ describe('Features', function(){
     describe('Thermostat', function(){
     // Thermostat starts at 20 degrees
         it('starts at a temperature 20 degrees', function(){
-            expect(thermostat.temperature).toEqual(20)
+            expect(thermostat.getCurrentTemp()).toEqual(20)
         })
 
         // The minimum temperature is 10 degrees
@@ -57,29 +57,29 @@ describe('Features', function(){
 
         // You can increase the temperature with an up function
         it('can adjust the temperature up', function(){
-            let initialTemp = thermostat.temperature
-            thermostat.tempUp(5)
-            expect(thermostat.temperature).toBe(initialTemp + 5)
+            thermostat.temperature = thermostat.MIN_TEMP
+            thermostat.tempUp(1)
+            expect(thermostat.getCurrentTemp()).toBe(thermostat.MIN_TEMP + 1)
         })
 
         // test at unit level
         // it('if power saving mode is on, maximum temperature cannot exceed 25 degrees', function(){
         //     thermostat.tempUp(thermostat.maxTemp + 1)
-        //     expect(thermostat.temperature).not.toBeGreaterThan(thermostat.maxTemp)
+        //     expect(thermostat.getCurrentTemp()).not.toBeGreaterThan(thermostat.maxTemp)
         // })
 
         // You can decrease the temperature with a down function
         it('can adjust the temperature down', function(){
-            let initialTemp = thermostat.temperature
-            thermostat.tempDown(5)
-            expect(thermostat.temperature).toBe(initialTemp - 5)
+            let initialTemp = thermostat.getCurrentTemp()
+            thermostat.tempDown(6)
+            expect(thermostat.getCurrentTemp()).toBe(initialTemp - 6)
         })
 
         // You can reset the temperature to 20 with a reset function
         it('user can reset the temperature to 20', function(){
             thermostat.tempUp(5)
             thermostat.reset()
-            expect(thermostat.temperature).toEqual(20)
+            expect(thermostat.getCurrentTemp()).toEqual(20)
         })
 
         // You can ask about the thermostat's current energy usage: < 18 is low-usage,
