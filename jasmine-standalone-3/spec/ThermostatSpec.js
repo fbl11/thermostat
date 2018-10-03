@@ -1,5 +1,8 @@
+'use strict'
+
 describe('Thermostat', function(){
     var thermostat 
+
     beforeEach(function(){
         thermostat = new Thermostat()
     });
@@ -8,8 +11,25 @@ describe('Thermostat', function(){
         expect(thermostat.temperature).toEqual(20)
     })
 
+    it('gets the current temperature', function () {
+        expect(thermostat.getCurrentTemp()).toEqual(20);
+    });
+
+    it('has a minimum temperature of 10 degrees', function () {
+        expect(thermostat.minTemp).toBe(10)
+    })
+
     it('has a power saving mode that is on by default', function(){
         expect(thermostat.powerSavingMode).toEqual(true)
+    })
+
+    describe('toggleMode', function () {
+        it('allows the user to toggle the power saving mode', function () {
+            thermostat.toggleMode()
+            expect(thermostat.powerSavingMode).toEqual(false)
+            thermostat.toggleMode()
+            expect(thermostat.powerSavingMode).toEqual(true)
+        })
     })
 
     it('if power saving mode is on maximum temperature is 25 degrees', function(){
@@ -21,48 +41,42 @@ describe('Thermostat', function(){
         expect(thermostat.maxTemp).toEqual(32)
     })
 
-    it('has a minimum temperature of 10 degrees', function(){
-        expect(thermostat.minTemp).toBe(10)
-    })
-
     describe('tempUp', function(){
-        it("should increase the temperature by given value", function(){
-            thermostat.temperature = 20;
-            thermostat.tempUp(5);
-            expect(thermostat.temperature).toBe(25);
+        it('increases the temperature by a given value', function(){
+            let initialTemp = thermostat.temperature
+            thermostat.tempUp(5)
+            expect(thermostat.temperature).toBe(initialTemp + 5)
         })
-        it('if power saving mode is on, maximum temperature can not exceed 25 degrees', function(){
-            thermostat.tempUp(thermostat.maxTemp + 1);
+        it('temperature cannot be increased beyond maximum temperature', function(){
+            thermostat.tempUp(thermostat.maxTemp + 1)
             expect(thermostat.temperature).not.toBeGreaterThan(thermostat.maxTemp)
         })
+        // above tests both scenarios
+        // it('if power saving mode is on, maximum temperature cannot exceed 32 degrees', function () {
+        //     thermostat.toggleMode()
+        //     thermostat.tempUp(thermostat.maxTemp + 1)
+        //     expect(thermostat.temperature).not.toBeGreaterThan(thermostat.maxTemp)
+        // })
     })
 
     describe('tempDown', function(){
-        it("should decrease the temperature by given value", function(){
-            thermostat.temperature = 20;
-            thermostat.tempDown(5);
-            expect(thermostat.temperature).toBe(15);
+        it('decreases the temperature by given value', function(){
+            let initialTemp = thermostat.temperature
+            thermostat.tempDown(5)
+            expect(thermostat.temperature).toBe(initialTemp - 5);
         })
-        it("should not decrease the temperature below minimum temperature", function(){
-            thermostat.temperature = 20;
-            thermostat.tempDown(15);
+        it('temperature cannot be decrease below minimum temperature', function(){
+            let initialTemp = thermostat.temperature
+            thermostat.tempDown(initialTemp - thermostat.maxTemp)
             expect(thermostat.temperature).not.toBeLessThan(thermostat.minTemp);
         })
     })
 
-    describe('toggleMode', function(){
-        it('allows the user to toggle the power saving mode', function(){          
-            thermostat.toggleMode()
-            expect(thermostat.powerSavingMode).toEqual(false)
-            thermostat.toggleMode()
-            expect(thermostat.powerSavingMode).toEqual(true)
-        })
-    })
     describe('reset', function(){
         it('user can reset the temperature to 20', function(){
-            initial_temp = thermostat.temperature;
-            thermostat.tempUp(5);
+            let initialTemp = thermostat.maxTemp
             thermostat.reset()
+            expect(thermostat.temperature).not.toEqual(initialTemp)
             expect(thermostat.temperature).toEqual(20)
         })
     })
@@ -72,17 +86,16 @@ describe('Thermostat', function(){
             thermostat.temperature = 26
             expect(thermostat.currentUsage()).toEqual('high-usage')
         })
-        it('displays the current energy usage as medium if temp between 19 and 24 inclusive', function(){
+        it('displays the current energy usage as medium, if temp is between 19 and 24 inclusive', function(){
             thermostat.temperature = 19
             expect(thermostat.currentUsage()).toEqual('medium-usage')
             thermostat.temperature = 24
             expect(thermostat.currentUsage()).toEqual('medium-usage')
         })
-        it('displays the current energy usage as low if temp below 18', function(){
+        it('displays the current energy usage as low, if temp is below 18', function(){
             thermostat.temperature = 17
             expect(thermostat.currentUsage()).toEqual('low-usage')
         })
     })
-
     
 })

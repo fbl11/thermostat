@@ -6,40 +6,43 @@ function Thermostat(){
 }
 
 Thermostat.prototype = {
-  tempUp: function(degrees){  
-    let newtemp = this.temperature + degrees;
-    newtemp > this.maxTemp ? this.temperature = this.maxTemp : this.temperature = newtemp;
-  },
 
-  tempDown: function(degrees){
+    getCurrentTemp: function () {
+        return this.temperature
+    },
 
-    let newtemp = this.temperature - degrees;
-    newtemp < this.minTemp ? this.temperature = this.minTemp : this.temperature = newtemp;
-    
-  },
+    tempUp: function(degrees){  
+        let newtemp = this.temperature + degrees;
+        newtemp > this.maxTemp ? this.temperature = this.maxTemp : this.temperature = newtemp;
+    },
 
-  toggleMode: function(){
-     if (this.powerSavingMode === true){
-        this.powerSavingMode = false;
-        this.maxTemp = 32;
-     } else {
-         this.powerSavingMode = true;
-         this.maxTemp = 25;
-     }
-  },
+    tempDown: function(degrees){
+        let newtemp = this.temperature - degrees;
+        newtemp < this.minTemp ? this.temperature = this.minTemp : this.temperature = newtemp;
+    },
 
-  reset: function(){
-      this.temperature = 20;
-  },
+    toggleMode: function(){
+        if (this.powerSavingMode === true){
+            this.powerSavingMode = false;
+            this.maxTemp = 32;
+        } else {
+            this.powerSavingMode = true;
+            this.maxTemp = 25;
+        }
+    },
 
-  currentUsage: function(){
-      if (this.temperature < 18) {
-          return "low-usage";
-      } else if (this.temperature > 25) {
-          return "high-usage";
-      } else {
-          return "medium-usage";
-      }
-  }
+    reset: function(){
+        this.temperature = 20;
+    },
+
+    currentUsage: function(){
+        if (this.temperature < 18) {
+            return "low-usage";
+        } else if (this.temperature > 25) {
+            return "high-usage";
+        } else {
+            return "medium-usage";
+        }
+    }
 
 };
