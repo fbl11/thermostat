@@ -14,6 +14,13 @@ Thermostat.prototype = {
         return this.temperature
     },
 
+    getPowerSaving: function() {
+        if (this.isSavingPower()) {
+            return 'On'
+        }
+        return 'Off'
+    },
+
     isMinTemp: function () {
         return this.temperature === this.MIN_TEMP
     },
@@ -21,6 +28,7 @@ Thermostat.prototype = {
     isSavingPower: function () {
         return this.powerSavingMode
     },
+
 
     // prototype functions
     tempUp: function (degrees = 1) {

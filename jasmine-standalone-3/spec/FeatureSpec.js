@@ -6,7 +6,7 @@ describe('Features', function(){
     var thermostat 
     
     beforeEach(function(){
-        thermostat = new Thermostat()
+       thermostat = new Thermostat()
     })
 
     describe('Thermostat', function(){

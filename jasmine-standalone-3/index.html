@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Thermostat</title>
+  </head>
+  <body>
+    <section class="display">
+      <h2>Overview</h2>
+      <span>Current temperature:
+        <p id='current-temp'>degrees</p>
+      </span>
+      <span>Power saving mode:
+        <p id='psm'>on or off</p>
+      </span>
+      <span>Energy usage:
+        <p id='energy'>high, medium or low</p>
+      </span>
+    </section>
+    <section class="controls">
+      <h2 class="temp-control">Temperature control</h2>
+      <button id="temp-up">Increase temperature</button>
+      <button id="temp-down">Decrease temperature</button>
+      <button id="reset-temp">Reset temperature</button>
+      <h2 class="power-controls">Power saving settings</h2>
+      <button id="powersaving-on">Power Saving on</button>
+      <button id="powersaving-off">Power Saving off</button>
+    </section>
+    <script src="src/Thermostat.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="src/script.js"></script>
+  </body>
+</html>
