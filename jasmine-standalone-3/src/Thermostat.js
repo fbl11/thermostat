@@ -29,7 +29,6 @@ Thermostat.prototype = {
         return this.powerSavingMode
     },
 
-
     // prototype functions
     tempUp: function (degrees = 1) {
         let newTemp = degrees + this.getCurrentTemp()
@@ -46,16 +45,6 @@ Thermostat.prototype = {
         }
         this.temperature -= degrees
     },
-
-    // toggleMode: function () {
-    //     if (this.isSavingPower() === true) {
-    //         this.powerSavingMode = false
-    //         this.maxTemp = 32
-    //     } else {
-    //         this.powerSavingMode = true
-    //         this.maxTemp = 25
-    //     }
-    // },
 
     // instead of toggle 
     switchOffSaving: function () {
@@ -81,5 +70,15 @@ Thermostat.prototype = {
             return 'medium-usage';
         }
     }
+
+    // toggleMode: function () {
+    //     if (this.isSavingPower() === true) {
+    //         this.powerSavingMode = false
+    //         this.maxTemp = 32
+    //     } else {
+    //         this.powerSavingMode = true
+    //         this.maxTemp = 25
+    //     }
+    // },
 
 };
